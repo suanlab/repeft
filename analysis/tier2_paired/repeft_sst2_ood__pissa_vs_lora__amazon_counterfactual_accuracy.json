@@ -1,0 +1,164 @@
+{
+  "baseline_name": "LoRA",
+  "candidate_name": "PISSA",
+  "metric": "amazon_counterfactual_accuracy",
+  "test_alternative": "two-sided",
+  "bootstrap_method": "BC (bias-corrected percentile)",
+  "shared_seeds": [
+    21,
+    31,
+    41,
+    51,
+    61,
+    71,
+    81,
+    91,
+    101,
+    111,
+    121,
+    131,
+    141,
+    151,
+    161,
+    171,
+    181,
+    191,
+    201
+  ],
+  "baseline_mean": 0.4460328947368421,
+  "candidate_mean_shared": 0.47069905263157896,
+  "mean_delta": 0.02466615789473684,
+  "bootstrap_ci": {
+    "low": 0.018538789473684217,
+    "high": 0.03157884210526315
+  },
+  "sign_flip_p": 3.814697265625e-06,
+  "wins": 19,
+  "losses": 0,
+  "ties": 0,
+  "baseline_failures": [
+    {
+      "seed": "11",
+      "host_id": "node",
+      "status": "FAIL",
+      "note": "exit 1"
+    }
+  ],
+  "candidate_failures": [],
+  "per_seed": [
+    {
+      "seed": 21,
+      "baseline": 0.435821,
+      "candidate": 0.459701,
+      "delta": 0.023880000000000012
+    },
+    {
+      "seed": 31,
+      "baseline": 0.453731,
+      "candidate": 0.474627,
+      "delta": 0.020896000000000026
+    },
+    {
+      "seed": 41,
+      "baseline": 0.453731,
+      "candidate": 0.468657,
+      "delta": 0.014925999999999995
+    },
+    {
+      "seed": 51,
+      "baseline": 0.468657,
+      "candidate": 0.483582,
+      "delta": 0.014925000000000022
+    },
+    {
+      "seed": 61,
+      "baseline": 0.480597,
+      "candidate": 0.489552,
+      "delta": 0.00895499999999999
+    },
+    {
+      "seed": 71,
+      "baseline": 0.450746,
+      "candidate": 0.489552,
+      "delta": 0.03880600000000001
+    },
+    {
+      "seed": 81,
+      "baseline": 0.447761,
+      "candidate": 0.459701,
+      "delta": 0.011940000000000006
+    },
+    {
+      "seed": 91,
+      "baseline": 0.435821,
+      "candidate": 0.492537,
+      "delta": 0.05671599999999999
+    },
+    {
+      "seed": 101,
+      "baseline": 0.441791,
+      "candidate": 0.477612,
+      "delta": 0.03582099999999999
+    },
+    {
+      "seed": 111,
+      "baseline": 0.41194,
+      "candidate": 0.444776,
+      "delta": 0.03283600000000003
+    },
+    {
+      "seed": 121,
+      "baseline": 0.435821,
+      "candidate": 0.477612,
+      "delta": 0.04179099999999997
+    },
+    {
+      "seed": 131,
+      "baseline": 0.456716,
+      "candidate": 0.465672,
+      "delta": 0.008955999999999964
+    },
+    {
+      "seed": 141,
+      "baseline": 0.459701,
+      "candidate": 0.480597,
+      "delta": 0.02089599999999997
+    },
+    {
+      "seed": 151,
+      "baseline": 0.444776,
+      "candidate": 0.447761,
+      "delta": 0.0029850000000000154
+    },
+    {
+      "seed": 161,
+      "baseline": 0.432836,
+      "candidate": 0.444776,
+      "delta": 0.011940000000000006
+    },
+    {
+      "seed": 171,
+      "baseline": 0.447761,
+      "candidate": 0.471642,
+      "delta": 0.023880999999999986
+    },
+    {
+      "seed": 181,
+      "baseline": 0.441791,
+      "candidate": 0.477612,
+      "delta": 0.03582099999999999
+    },
+    {
+      "seed": 191,
+      "baseline": 0.435821,
+      "candidate": 0.480597,
+      "delta": 0.04477599999999998
+    },
+    {
+      "seed": 201,
+      "baseline": 0.438806,
+      "candidate": 0.456716,
+      "delta": 0.017910000000000037
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "baseline_name": "LoRA",
+  "candidate_name": "DORA",
+  "metric": "anli_r1_accuracy",
+  "test_alternative": "two-sided",
+  "bootstrap_method": "BC (bias-corrected percentile)",
+  "shared_seeds": [
+    11,
+    21,
+    31,
+    41,
+    51,
+    61,
+    81,
+    91,
+    101,
+    111,
+    121,
+    131,
+    141,
+    151,
+    161,
+    171,
+    181,
+    191,
+    201
+  ],
+  "baseline_mean": NaN,
+  "candidate_mean_shared": 0.257,
+  "mean_delta": NaN,
+  "bootstrap_ci": {
+    "low": NaN,
+    "high": NaN
+  },
+  "sign_flip_p": 0.0,
+  "wins": 8,
+  "losses": 10,
+  "ties": 0,
+  "baseline_failures": [
+    {
+      "seed": "71",
+      "host_id": "node",
+      "status": "FAIL",
+      "note": "mkdir: "
+    }
+  ],
+  "candidate_failures": [],
+  "per_seed": [
+    {
+      "seed": 11,
+      "baseline": 0.242,
+      "candidate": 0.245,
+      "delta": 0.0030000000000000027
+    },
+    {
+      "seed": 21,
+      "baseline": NaN,
+      "candidate": 0.259,
+      "delta": NaN
+    },
+    {
+      "seed": 31,
+      "baseline": 0.266,
+      "candidate": 0.257,
+      "delta": -0.009000000000000008
+    },
+    {
+      "seed": 41,
+      "baseline": 0.26,
+      "candidate": 0.25,
+      "delta": -0.010000000000000009
+    },
+    {
+      "seed": 51,
+      "baseline": 0.271,
+      "candidate": 0.26,
+      "delta": -0.01100000000000001
+    },
+    {
+      "seed": 61,
+      "baseline": 0.257,
+      "candidate": 0.275,
+      "delta": 0.018000000000000016
+    },
+    {
+      "seed": 81,
+      "baseline": 0.275,
+      "candidate": 0.285,
+      "delta": 0.009999999999999953
+    },
+    {
+      "seed": 91,
+      "baseline": 0.24,
+      "candidate": 0.248,
+      "delta": 0.008000000000000007
+    },
+    {
+      "seed": 101,
+      "baseline": 0.257,
+      "candidate": 0.254,
+      "delta": -0.0030000000000000027
+    },
+    {
+      "seed": 111,
+      "baseline": 0.264,
+      "candidate": 0.252,
+      "delta": -0.01200000000000001
+    },
+    {
+      "seed": 121,
+      "baseline": 0.26,
+      "candidate": 0.258,
+      "delta": -0.0020000000000000018
+    },
+    {
+      "seed": 131,
+      "baseline": 0.264,
+      "candidate": 0.247,
+      "delta": -0.017000000000000015
+    },
+    {
+      "seed": 141,
+      "baseline": 0.247,
+      "candidate": 0.258,
+      "delta": 0.01100000000000001
+    },
+    {
+      "seed": 151,
+      "baseline": 0.276,
+      "candidate": 0.261,
+      "delta": -0.015000000000000013
+    },
+    {
+      "seed": 161,
+      "baseline": 0.269,
+      "candidate": 0.251,
+      "delta": -0.018000000000000016
+    },
+    {
+      "seed": 171,
+      "baseline": 0.258,
+      "candidate": 0.262,
+      "delta": 0.0040000000000000036
+    },
+    {
+      "seed": 181,
+      "baseline": 0.245,
+      "candidate": 0.251,
+      "delta": 0.006000000000000005
+    },
+    {
+      "seed": 191,
+      "baseline": 0.239,
+      "candidate": 0.247,
+      "delta": 0.008000000000000007
+    },
+    {
+      "seed": 201,
+      "baseline": 0.265,
+      "candidate": 0.263,
+      "delta": -0.0020000000000000018
+    }
+  ]
+}

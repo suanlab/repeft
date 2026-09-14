@@ -1,0 +1,11 @@
+{
+  "name": "repeft_lora_bert_squad2",
+  "description": "REPEFT: LoRA baseline on bert-base-uncased SQuAD v2",
+  "base_command": "python3 real_lora_qa.py --model bert-base-uncased --dataset rajpurkar/squad_v2 --train-split train --eval-split validation --question-field question --context-field context --answer-field answers --output-dir . --peft-method lora --lora-r 8 --lora-alpha 16 --lr 0.0008 --num-epochs 2 --batch-size 8 --seq-length 256 --max-samples 5000 --max-eval-samples 1000 --seed {seed}",
+  "parameters": {"seed": [11,21,31,41,51,61,71,81,91,101]},
+  "stage_files": ["/projects/REPEFT/real_lora_qa.py"],
+  "optimize": "f1",
+  "mode": "max",
+  "job_timeout": 3600,
+  "env_dir": "$HOME/mlenv"
+}

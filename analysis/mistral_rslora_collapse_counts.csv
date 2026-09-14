@@ -1,0 +1,11 @@
+seed,lora_acc,rslora_naive_acc,delta,collapse_strict_lt05,collapse_partial_lt07,paired_loss_gt5pp,notes
+42,0.866,0.870,0.004,no,no,no,trained_cleanly_both
+43,0.869,0.326,-0.543,YES,YES,YES,rslora_collapsed_majority_class
+44,0.872,0.357,-0.515,YES,YES,YES,rslora_collapsed_majority_class
+45,0.884,0.880,-0.004,no,no,no,both_succeeded
+46,0.867,0.869,0.002,no,no,no,both_succeeded
+47,0.869,0.881,0.012,no,no,no,both_succeeded_rslora_slightly_better
+48,0.876,0.587,-0.289,no,YES,YES,rslora_partial_collapse_intermediate_accuracy
+49,0.869,0.869,0.000,no,no,no,both_succeeded_exact_tie
+50,0.869,0.882,0.013,no,no,no,both_succeeded
+51,0.873,0.887,0.014,no,no,no,both_succeeded

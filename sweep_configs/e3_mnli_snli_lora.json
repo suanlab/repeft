@@ -1,0 +1,9 @@
+{
+  "name": "e3_mnli_snli_lora",
+  "description": "E3: lora MNLI→SNLI+ANLI OOD eval (with SNLI fix)",
+  "base_command": "python3 train_and_eval_ood.py --model roberta-base --peft-method lora --lr 0.0002 --lora-r 8 --lora-alpha 16 --lora-dropout 0.05 --num-epochs 2 --batch-size 8 --seq-length 256 --max-train-samples 7000 --max-eval-samples 1500 --max-ood-samples 1000 --output-dir . --seed {seed}",
+  "parameters": {"seed": [11,21,31,41,51,61,71,81,91,101,111,121,131,141,151,161,171,181,191,201]},
+  "stage_files": ["/projects/REPEFT/train_and_eval_ood.py"],
+  "optimize": "mnli_matched_accuracy", "mode": "max",
+  "job_timeout": 1800, "env_dir": "$HOME/mlenv"
+}

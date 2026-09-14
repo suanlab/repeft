@@ -1,0 +1,99 @@
+{
+  "baseline_name": "LoRA",
+  "candidate_name": "AdaLoRA_scheduleFaithful",
+  "metric": "eval_f1",
+  "test_alternative": "two-sided",
+  "bootstrap_method": "BC (bias-corrected percentile)",
+  "exact_threshold": 18,
+  "mc_samples": 5000,
+  "n_shared": 10,
+  "min_shared_seeds": 8,
+  "holm_eligible": true,
+  "shared_seeds": [
+    11,
+    21,
+    31,
+    41,
+    51,
+    61,
+    71,
+    81,
+    91,
+    101
+  ],
+  "baseline_mean": 52.72613510000001,
+  "candidate_mean_shared": 15.534338799999997,
+  "mean_delta": -37.1917963,
+  "bootstrap_ci": {
+    "low": -38.5352305,
+    "high": -35.8168348
+  },
+  "sign_flip_p": 0.001953125,
+  "wins": 0,
+  "losses": 10,
+  "ties": 0,
+  "baseline_failures": [],
+  "candidate_failures": [],
+  "per_seed": [
+    {
+      "seed": 11,
+      "baseline": 52.792901,
+      "candidate": 15.318556,
+      "delta": -37.474345
+    },
+    {
+      "seed": 21,
+      "baseline": 56.190653,
+      "candidate": 14.844765,
+      "delta": -41.345887999999995
+    },
+    {
+      "seed": 31,
+      "baseline": 48.112933,
+      "candidate": 14.904145,
+      "delta": -33.208788
+    },
+    {
+      "seed": 41,
+      "baseline": 51.599288,
+      "candidate": 15.095369,
+      "delta": -36.503919
+    },
+    {
+      "seed": 51,
+      "baseline": 54.612042,
+      "candidate": 15.967453,
+      "delta": -38.644589
+    },
+    {
+      "seed": 61,
+      "baseline": 53.432936,
+      "candidate": 16.209234,
+      "delta": -37.223702
+    },
+    {
+      "seed": 71,
+      "baseline": 50.89554,
+      "candidate": 14.85371,
+      "delta": -36.04183
+    },
+    {
+      "seed": 81,
+      "baseline": 54.787817,
+      "candidate": 16.477338,
+      "delta": -38.310479
+    },
+    {
+      "seed": 91,
+      "baseline": 53.9261,
+      "candidate": 15.071601,
+      "delta": -38.854499
+    },
+    {
+      "seed": 101,
+      "baseline": 50.911141,
+      "candidate": 16.601217,
+      "delta": -34.309924
+    }
+  ]
+}

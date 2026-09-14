@@ -1,0 +1,15 @@
+{
+  "name": "robustness_full_boolq_dora",
+  "description": "Robustness check (paper Appendix J): Cell 1 BoolQ DoRA roberta-base at full BoolQ training set (9.4K) to verify direction agrees with the 7K subsample audit. 5 seeds × paired LoRA. Reserved for camera-ready execution.",
+  "base_command": "python3 real_lora_classify.py --model roberta-base --dataset super_glue --dataset-config boolq --train-split train --eval-split validation --text-field-a question --text-field-b passage --label-field label --metric accuracy --output-dir . --peft-method {peft_method} --lr 0.0002 --lora-r 16 --lora-alpha 32 --lora-dropout 0.05 --num-epochs 2 --batch-size 8 --seq-length 256 --seed {seed}",
+  "parameters": {
+    "seed": [11, 21, 31, 41, 51],
+    "peft_method": ["lora", "dora"]
+  },
+  "stage_files": ["/projects/REPEFT/real_lora_classify.py"],
+  "optimize": "eval_accuracy",
+  "mode": "max",
+  "job_timeout": 7200,
+  "env_dir": "$HOME/mlenv",
+  "notes": "Compared against e5_rank16_dora_boolq.json (subsample max_samples=7000, eval=1500). This config omits --max-samples to use the full BoolQ training set (~9.4K) and full validation set (~3.3K). Paired: 5 seeds × {lora, dora} = 10 runs. Statistical test: project_a_pairwise_summary.py with one-sided sign-flip for DoRA > LoRA pre-specified direction."
+}

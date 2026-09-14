@@ -1,0 +1,11 @@
+{
+  "name": "rev_rslora_r32_boolq",
+  "description": "Revision: rsLoRA at rank=32 on BoolQ (reviewer C request)",
+  "base_command": "python3 real_lora_classify.py --model roberta-base --dataset super_glue --dataset-config boolq --train-split train --eval-split validation --text-field-a question --text-field-b passage --label-field label --metric accuracy --output-dir . --peft-method rslora --lr 0.0002 --lora-r 32 --lora-alpha 64 --lora-dropout 0.05 --num-epochs 2 --batch-size 8 --seq-length 256 --max-samples 7000 --max-eval-samples 1500 --seed {seed}",
+  "parameters": {"seed": [11,21,31,41,51,61,71,81,91,101]},
+  "stage_files": ["/projects/REPEFT/real_lora_classify.py"],
+  "optimize": "eval_accuracy",
+  "mode": "max",
+  "job_timeout": 1800,
+  "env_dir": "$HOME/mlenv"
+}

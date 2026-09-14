@@ -1,0 +1,17 @@
+cell_name,p,holm_threshold,survives,mean_delta
+e3_mnli_snli__pissa_vs_lora__mnli_matched_accuracy,1.90735e-06,0.003125,True,0.010263
+repeft_sst2_ood__pissa_vs_lora__amazon_counterfactual_accuracy,3.8147e-06,0.00333333,True,0.024666
+e3_mnli_snli__pissa_vs_lora__anli_r2_accuracy,0.000198364,0.00357143,True,-0.009895
+repeft_sst2_ood__dora_vs_lora__amazon_counterfactual_accuracy,0.0318604,0.00384615,False,0.003456
+e3_mnli_snli__pissa_vs_lora__mnli_mismatched_accuracy,0.0358467,0.00416667,False,0.004789
+e3_mnli_snli__dora_vs_lora__mnli_matched_accuracy,0.0664215,0.00454545,False,0.002789
+e3_mnli_snli__dora_vs_lora__anli_r3_accuracy,0.166473,0.005,False,-0.003105
+e3_mnli_snli__pissa_vs_lora__anli_r3_accuracy,0.212387,0.00555556,False,-0.004263
+repeft_sst2_ood__pissa_vs_lora__yelp_ood_accuracy,0.410637,0.00625,False,0.001211
+e3_mnli_snli__pissa_vs_lora__snli_accuracy,0.421768,0.00714286,False,0.003158
+repeft_sst2_ood__dora_vs_lora__yelp_ood_accuracy,0.519775,0.00833333,False,0.000684
+e3_mnli_snli__dora_vs_lora__mnli_mismatched_accuracy,0.556164,0.01,False,-0.000105
+e3_mnli_snli__dora_vs_lora__anli_r2_accuracy,0.708191,0.0125,False,0.000737
+e3_mnli_snli__dora_vs_lora__snli_accuracy,0.748608,0.0166667,False,-0.001105
+repeft_sst2_ood__dora_vs_lora__sst2_id_accuracy,0.857452,0.025,False,-0.000905
+repeft_sst2_ood__pissa_vs_lora__sst2_id_accuracy,0.908772,0.05,False,-0.001750

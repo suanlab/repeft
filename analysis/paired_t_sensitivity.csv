@@ -1,0 +1,17 @@
+cell_id,model,method,task,regime,N,mean_delta,std_delta,sign_flip_p,paired_t_p,adjudication_signflip,adjudication_t,adjudication_consistent,notes
+1,roberta-base,DoRA,BoolQ,common,20,0.0050,0.0148,0.151,0.158,unsupported,unsupported,yes,
+2,roberta-base,PiSSA,BoolQ,common,20,0.0110,0.0167,0.011,0.014,unsupported_dagger,unsupported_dagger,yes,raw_significant_but_holm_fails
+3,roberta-base,DoRA,MNLI,common,20,0.0010,0.0040,0.310,0.328,unsupported,unsupported,yes,
+4,roberta-base,PiSSA,MNLI,common,20,0.0090,0.0066,0.0006,0.0008,supported,supported,yes,
+5,bert-base,AdaLoRA,SQuAD1,common,9,-36.7,1.7,0.004,0.003,reversed,reversed,yes,
+6,roberta-base,rsLoRA,BoolQ,common,17,0.0020,0.0436,0.833,0.847,unsupported,unsupported,yes,
+7,Qwen2.5-3B,PiSSA,GSM8K,common,20,2.62,2.05,0.0002,0.0004,supported,supported,yes,
+8,Qwen2.5-3B,DoRA,GSM8K,common,20,-0.05,1.572,0.887,0.888,unsupported,unsupported,yes,computed_from_per_seed
+9,Qwen2.5-3B,PiSSA,GSM8K,faithful,19,-1.30,1.606,0.0024,0.0024,reversed,reversed,yes,computed_from_per_seed
+10,phi-2,PiSSA,GSM8K,common,18,-0.2593,2.451,0.6323,0.6592,unsupported,unsupported,yes,computed_from_per_seed
+11,bert-base,AdaLoRA,SQuAD2,common,10,-3.0167,0.5667,0.00195,4.13e-08,reversed,reversed,yes,very_low_variance_makes_t_extreme
+12,Qwen2.5-3B,DoRA,GSM8K,r32,8,0.04,1.10,0.89,0.93,unsupported,unsupported,yes,
+13,Mistral-7B,PiSSA,GSM8K,common,10,-1.900,1.750,0.0078,0.0075,reversed,reversed,yes,computed_from_per_seed
+14,Mistral-7B,DoRA,GSM8K,common,8,0.33,1.42,0.55,0.61,unsupported,unsupported,yes,
+15,Qwen2.5-3B,PiSSA,GSM8K_claim,faithful,8,-1.29,1.97,0.10,0.07,unsupported_S,unsupported_S,yes,exploratory_excluded_from_Holm
+16,Gemma-7B,PiSSA,GSM8K_claim,faithful,10,-1.5845,1.2347,0.0039,0.0028,reversed,reversed,yes,two_sided_signflip_per_audit_CHECK_B1

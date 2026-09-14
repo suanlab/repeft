@@ -1,0 +1,11 @@
+seed,status,eval_commonsense_avg,last_logged_loss,notes
+11,OK,60.26,0,training_completed_to_eval
+21,OK,61.25,0,training_completed_to_eval
+31,GRAD_NORM_NAN,,0,grad_norm NaN observed at epoch~0.08975
+41,GRAD_NORM_NAN,,0,grad_norm NaN observed at epoch~0.01148
+51,OOM_INFRA_FAIL,,,CUDA OOM under concurrent GPU sharing; dropped per PREREGISTRATION 1.3
+61,OOM_INFRA_FAIL,,,CUDA OOM under concurrent GPU sharing; dropped per PREREGISTRATION 1.3
+71,OOM_INFRA_FAIL,,,CUDA OOM under concurrent GPU sharing; dropped per PREREGISTRATION 1.3
+81,OOM_INFRA_FAIL,,,CUDA OOM under concurrent GPU sharing; dropped per PREREGISTRATION 1.3
+91,OOM_INFRA_FAIL,,,CUDA OOM under concurrent GPU sharing; dropped per PREREGISTRATION 1.3
+101,OOM_INFRA_FAIL,,,CUDA OOM under concurrent GPU sharing; dropped per PREREGISTRATION 1.3

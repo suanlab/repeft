@@ -1,0 +1,30 @@
+# REPEFT project dependencies
+# Pinned to match RESPONSIBLE_NLP_CHECKLIST.md Section B1 declared versions.
+# Hard pins ensure reviewer-side reproduction matches paper-reported numbers.
+
+# Core framework
+torch==2.3.0
+transformers==4.42.0
+peft==0.11.0
+datasets==2.18.0
+accelerate==0.30.0
+
+# Quantization (4-bit / 8-bit support for 7B confirmatory cells)
+bitsandbytes==0.43.0
+
+# Tokenization / utility
+tiktoken==0.6.0
+
+# Numeric: pin numpy <2.0 (peft 0.11 incompatibility with numpy 2.x).
+numpy>=1.24.0,<2.0.0
+
+# Statistical analysis (paired-t sensitivity column in analysis/paired_t_sensitivity.csv).
+scipy>=1.10.0,<2.0.0
+
+# Evaluation harness for commonsense Cells 17-18 (train_and_eval_commonsense.py).
+# Version 0.4.11 verified from on-disk lm_eval_output/.../results_*.json metadata
+# of the published Cells 17-18 runs (see analysis/cell18_fp16_outcomes.csv).
+lm-eval==0.4.11
+
+# Figure generation (scripts/make_fig*.py).
+matplotlib>=3.7.0,<4.0.0

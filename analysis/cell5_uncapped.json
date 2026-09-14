@@ -1,0 +1,99 @@
+{
+  "baseline_name": "LoRA",
+  "candidate_name": "AdaLoRA",
+  "metric": "eval_f1",
+  "test_alternative": "two-sided",
+  "bootstrap_method": "BC (bias-corrected percentile)",
+  "exact_threshold": 18,
+  "mc_samples": 5000,
+  "n_shared": 10,
+  "min_shared_seeds": 8,
+  "holm_eligible": true,
+  "shared_seeds": [
+    11,
+    21,
+    31,
+    41,
+    51,
+    61,
+    71,
+    81,
+    91,
+    101
+  ],
+  "baseline_mean": 65.4933178,
+  "candidate_mean_shared": 55.4041989,
+  "mean_delta": -10.089118899999999,
+  "bootstrap_ci": {
+    "low": -10.744629699999999,
+    "high": -9.3962556
+  },
+  "sign_flip_p": 0.001953125,
+  "wins": 0,
+  "losses": 10,
+  "ties": 0,
+  "baseline_failures": [],
+  "candidate_failures": [],
+  "per_seed": [
+    {
+      "seed": 11,
+      "baseline": 64.085067,
+      "candidate": 56.028741,
+      "delta": -8.056325999999999
+    },
+    {
+      "seed": 21,
+      "baseline": 65.145621,
+      "candidate": 54.92198,
+      "delta": -10.223641000000008
+    },
+    {
+      "seed": 31,
+      "baseline": 64.896607,
+      "candidate": 54.110085,
+      "delta": -10.786522000000005
+    },
+    {
+      "seed": 41,
+      "baseline": 65.254853,
+      "candidate": 55.628039,
+      "delta": -9.626813999999996
+    },
+    {
+      "seed": 51,
+      "baseline": 65.198332,
+      "candidate": 55.5633,
+      "delta": -9.635031999999995
+    },
+    {
+      "seed": 61,
+      "baseline": 65.593941,
+      "candidate": 56.080783,
+      "delta": -9.513158000000004
+    },
+    {
+      "seed": 71,
+      "baseline": 65.891697,
+      "candidate": 54.977109,
+      "delta": -10.914587999999995
+    },
+    {
+      "seed": 81,
+      "baseline": 68.252754,
+      "candidate": 56.869742,
+      "delta": -11.383011999999994
+    },
+    {
+      "seed": 91,
+      "baseline": 65.440541,
+      "candidate": 56.460409,
+      "delta": -8.980131999999998
+    },
+    {
+      "seed": 101,
+      "baseline": 65.173765,
+      "candidate": 53.401801,
+      "delta": -11.771964000000004
+    }
+  ]
+}

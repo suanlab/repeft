@@ -1,0 +1,14 @@
+{
+  "name": "repeft_rslora_threshold_r64",
+  "description": "rsLoRA α/√r boundary replication on REPEFT cluster. BERT-base / MNLI 50K, r=64, vary α ∈ {2, 4, 8, 16, 32} (α/√r ∈ {0.25, 0.5, 1.0, 2.0, 4.0}), lr=3e-4, 3 seeds each = 15 jobs. Confirms MultiAgent's lr×α/√r ≈ 5e-4 critical boundary.",
+  "base_command": "python3 real_lora_classify.py --model bert-base-uncased --dataset nyu-mll/glue --dataset-config mnli --train-split train --eval-split validation_matched --text-field-a premise --text-field-b hypothesis --label-field label --metric accuracy --output-dir . --peft-method rslora --lr 3e-4 --lora-r 64 --lora-alpha {alpha} --lora-dropout 0.05 --num-epochs 3 --batch-size 16 --seq-length 256 --max-samples 50000 --max-eval-samples 1000 --seed {seed}",
+  "parameters": {
+    "alpha": [2, 4, 8, 16, 32],
+    "seed": [42, 43, 44]
+  },
+  "stage_files": ["/projects/REPEFT/real_lora_classify.py", "/projects/REPEFT/peft_utils.py"],
+  "optimize": "eval_accuracy",
+  "mode": "max",
+  "job_timeout": 5400,
+  "env_dir": null
+}

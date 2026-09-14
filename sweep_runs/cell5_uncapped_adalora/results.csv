@@ -1,0 +1,11 @@
+job_id,host_id,ip,status,return_code,note,seed,model,eval_f1,eval_exact_match
+seed=11,node,redacted,OK,0,uncapped_tinit250_tfinal750,11,bert-base-uncased,56.028741,47.6
+seed=21,node,redacted,OK,0,uncapped_tinit250_tfinal750,21,bert-base-uncased,54.92198,46.5
+seed=31,node,redacted,OK,0,uncapped_tinit250_tfinal750,31,bert-base-uncased,54.110085,46.3
+seed=41,node,redacted,OK,0,uncapped_tinit250_tfinal750,41,bert-base-uncased,55.628039,46.9
+seed=51,node,redacted,OK,0,uncapped_tinit250_tfinal750,51,bert-base-uncased,55.5633,47.0
+seed=61,node,redacted,OK,0,uncapped_tinit250_tfinal750,61,bert-base-uncased,56.080783,47.5
+seed=71,node,redacted,OK,0,uncapped_tinit250_tfinal750,71,bert-base-uncased,54.977109,46.6
+seed=81,node,redacted,OK,0,uncapped_tinit250_tfinal750,81,bert-base-uncased,56.869742,48.0
+seed=91,node,redacted,OK,0,uncapped_tinit250_tfinal750,91,bert-base-uncased,56.460409,48.1
+seed=101,node,redacted,OK,0,uncapped_tinit250_tfinal750,101,bert-base-uncased,53.401801,45.2

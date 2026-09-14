@@ -1,0 +1,64 @@
+{
+  "per_seed": [
+    {
+      "seed": 11,
+      "baseline": 63.7,
+      "candidate": 63.81,
+      "delta": 0.10999999999999943
+    },
+    {
+      "seed": 21,
+      "baseline": 63.94,
+      "candidate": 64.16,
+      "delta": 0.21999999999999886
+    },
+    {
+      "seed": 31,
+      "baseline": 63.29,
+      "candidate": 63.62,
+      "delta": 0.3299999999999983
+    },
+    {
+      "seed": 41,
+      "baseline": 65.23,
+      "candidate": 63.31,
+      "delta": -1.9200000000000017
+    },
+    {
+      "seed": 51,
+      "baseline": 63.07,
+      "candidate": 61.92,
+      "delta": -1.1499999999999986
+    },
+    {
+      "seed": 61,
+      "baseline": 64.93,
+      "candidate": 64.79,
+      "delta": -0.14000000000000057
+    },
+    {
+      "seed": 71,
+      "baseline": 65.36,
+      "candidate": 64.28,
+      "delta": -1.0799999999999983
+    },
+    {
+      "seed": 81,
+      "baseline": 64.39,
+      "candidate": 62.74,
+      "delta": -1.6499999999999986
+    },
+    {
+      "seed": 91,
+      "baseline": 65.37,
+      "candidate": 65.28,
+      "delta": -0.09000000000000341
+    },
+    {
+      "seed": 101,
+      "baseline": 64.3,
+      "candidate": 64.57,
+      "delta": 0.269999999999996
+    }
+  ]
+}

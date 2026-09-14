@@ -1,0 +1,18 @@
+{
+    "name": "project_b_mnli_config_diverse",
+    "description": "Project B pilot: controlled config-diverse LoRA classifiers on GLUE MNLI",
+    "base_command": "python3 real_lora_classify.py --model roberta-base --dataset nyu-mll/glue --dataset-config mnli --train-split train --eval-split validation_matched --text-field-a premise --text-field-b hypothesis --label-field label --metric accuracy --output-dir . --lr {lr} --lora-r {rank} --lora-alpha {alpha} --lora-dropout 0.05 --num-epochs 2 --batch-size 8 --seq-length 256 --max-samples 20000 --max-eval-samples 2000 --seed {seed}",
+    "parameters": {
+        "lr": [0.0001, 0.0002],
+        "rank": [8, 16],
+        "alpha": [16, 32],
+        "seed": [42, 52]
+    },
+    "stage_files": [
+        "/projects/REPEFT/real_lora_classify.py"
+    ],
+    "optimize": "eval_accuracy",
+    "mode": "max",
+    "job_timeout": 1800,
+    "env_dir": "$HOME/mlenv"
+}

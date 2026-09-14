@@ -1,0 +1,11 @@
+{
+  "name": "claim_dora_llama2_7b_commonsense_lora_a6000",
+  "description": "DoRA claim-matched BASELINE: LoRA on LLaMA-2-7B, commonsense_170k train, lm-eval 8-task eval, paper-faithful HP (r=32, α=64)",
+  "base_command": "python3 train_and_eval_commonsense.py --model NousResearch/Llama-2-7b-hf --peft-method lora --gradient-checkpointing --lr 2e-4 --lora-r 32 --lora-alpha 64 --lora-dropout 0.05 --lora-target q_proj k_proj v_proj up_proj down_proj gate_proj --warmup-ratio 0.03 --num-epochs 1 --batch-size 2 --seq-length 512 --max-samples 170420 --seed {seed} --output-dir ./experiments/7b_results/claim_dora_commonsense_lora_a6000/seed_{seed}",
+  "parameters": {"seed": [11, 21, 31, 41, 51, 61, 71, 81, 91, 101]},
+  "stage_files": ["/projects/REPEFT/train_and_eval_commonsense.py", "/projects/REPEFT/real_lora_train.py"],
+  "optimize": "eval_commonsense_avg",
+  "mode": "max",
+  "job_timeout": 86400,
+  "env_dir": null
+}

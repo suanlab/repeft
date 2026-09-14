@@ -1,0 +1,5 @@
+job_id,status,return_code,wall_time_s,gpu,seed
+seed=11,OK,0,46388.1,0,11
+seed=21,OK,0,44773.9,0,21
+seed=31,OK,0,46999.7,0,31
+seed=41,OK,0,57063.2,0,41

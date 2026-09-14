@@ -1,0 +1,13 @@
+model,term,coefficient,std_error,p_value,interpretation
+MixedLM,lr_main_effect,4.8073,0.8619,2.43942e-08,fixed effect from MixedLM (seed random effect)
+MixedLM,alpha_main_effect,0.8490,0.8619,0.324622,fixed effect from MixedLM (seed random effect)
+MixedLM,lr_x_alpha_interaction,-1.6863,1.2754,0.186085,fixed effect from MixedLM (seed random effect)
+OLS_cluster,lr_main_effect,5.1458,0.8606,2.23551e-09,OLS with cluster-robust SE on seed (sensitivity)
+OLS_cluster,alpha_main_effect,1.1875,0.5168,0.0215717,OLS with cluster-robust SE on seed (sensitivity)
+OLS_cluster,lr_x_alpha_interaction,-2.2792,0.9971,0.0222612,OLS with cluster-robust SE on seed (sensitivity)
+MixedLM_meta,var_seed,0.772833,,,Random-effect variance (between-seed)
+MixedLM_meta,var_residual,3.073769,,,Residual variance (within-seed)
+MixedLM_meta,icc,0.200913,,,Intraclass correlation
+MixedLM_meta,N_obs,52,,,Total observations
+MixedLM_meta,N_seeds,20,,,Unique seeds
+OLS_cluster_meta,R_squared,0.5444,,,OLS R^2

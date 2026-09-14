@@ -1,0 +1,8 @@
+{
+  "job_id": "seed=41",
+  "status": "OK",
+  "return_code": 0,
+  "wall_time_s": 57063.2,
+  "gpu": 0,
+  "seed": 41
+}

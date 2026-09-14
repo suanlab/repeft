@@ -1,0 +1,11 @@
+{
+  "name": "claim_pissa_metamath_lora",
+  "description": "PiSSA claim-matched: lora on MetaMathQA→GSM8K, paper-faithful HP",
+  "base_command": "python3 real_lora_train.py --model Qwen/Qwen2.5-3B --dataset meta-math/MetaMathQA --dataset-split train --eval-dataset openai/gsm8k --eval-dataset-config main --eval-split test --eval-metric gsm8k_exact_match --generation-max-new-tokens 128 --prompt-field query --target-field response --output-dir . --peft-method lora --load-in-4bit --bnb-compute-dtype float16 --gradient-checkpointing --lr 0.00002 --lora-r 8 --lora-alpha 8 --lora-dropout 0 --warmup-ratio 0.03 --num-epochs 1 --batch-size 1 --seq-length 512 --max-samples 5000 --max-eval-samples 300 --seed {seed}",
+  "parameters": {"seed": [11,21,31,41,51,61,71,81,91,101]},
+  "stage_files": ["/projects/REPEFT/real_lora_train.py"],
+  "optimize": "eval_gsm8k_exact_match",
+  "mode": "max",
+  "job_timeout": 10800,
+  "env_dir": "$HOME/mlenv"
+}

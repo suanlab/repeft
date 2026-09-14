@@ -1,0 +1,11 @@
+{
+  "name": "claim_pissa_gemma7b_pissa",
+  "description": "PiSSA claim-matched: PiSSA on Gemma-7B, MetaMathQA→GSM8K, paper-faithful HP (r=128, α=128, niter=4, lr=2e-5, 1 epoch)",
+  "base_command": "python3 real_lora_train.py --model google/gemma-7b --dataset meta-math/MetaMathQA --dataset-split train --eval-dataset openai/gsm8k --eval-dataset-config main --eval-split test --eval-metric gsm8k_exact_match --generation-max-new-tokens 128 --prompt-field query --target-field response --output-dir . --peft-method pissa --pissa-niter 4 --gradient-checkpointing --lora-target q_proj k_proj v_proj o_proj up_proj down_proj gate_proj --lr 2e-5 --lora-r 128 --lora-alpha 128 --lora-dropout 0 --warmup-ratio 0.03 --num-epochs 1 --batch-size 2 --seq-length 512 --max-samples 50000 --max-eval-samples 1319 --seed {seed}",
+  "parameters": {"seed": [11, 21, 31, 41, 51, 61, 71, 81, 91, 101]},
+  "stage_files": ["/projects/REPEFT/real_lora_train.py"],
+  "optimize": "eval_gsm8k_exact_match",
+  "mode": "max",
+  "job_timeout": 86400,
+  "env_dir": null
+}

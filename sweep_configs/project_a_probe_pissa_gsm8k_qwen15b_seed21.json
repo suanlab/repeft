@@ -1,0 +1,13 @@
+{
+  "name": "project_a_probe_pissa_gsm8k_qwen15b_seed21",
+  "description": "Project A PiSSA-family feasibility probe: PiSSA on GSM8K with Qwen2.5-1.5B, replacement seed 21",
+  "base_command": "python3 real_lora_train.py --model Qwen/Qwen2.5-1.5B --dataset openai/gsm8k --dataset-config main --dataset-split train --eval-split test --prompt-field question --target-field answer --eval-metric gsm8k_exact_match --generation-max-new-tokens 96 --output-dir . --peft-method pissa --pissa-niter 4 --lr 0.0002 --lora-r 8 --lora-alpha 16 --lora-dropout 0.05 --num-epochs 1 --batch-size 2 --seq-length 256 --max-samples 2000 --max-eval-samples 200 --seed 21",
+  "parameters": {},
+  "stage_files": [
+    "/projects/REPEFT/real_lora_train.py"
+  ],
+  "optimize": "eval_gsm8k_exact_match",
+  "mode": "max",
+  "job_timeout": 3600,
+  "env_dir": "$HOME/mlenv"
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "alpha": 32,
+    "alpha_over_r": 0.5,
+    "n": 10,
+    "failures": 0,
+    "failure_rate": 0.0,
+    "ci_low": 0,
+    "ci_high": 0.278,
+    "mean_acc_success": 0.7879
+  },
+  {
+    "alpha": 40,
+    "alpha_over_r": 0.625,
+    "n": 6,
+    "failures": 0,
+    "failure_rate": 0.0,
+    "ci_low": 0,
+    "ci_high": 0.39,
+    "mean_acc_success": 0.7872
+  },
+  {
+    "alpha": 48,
+    "alpha_over_r": 0.75,
+    "n": 9,
+    "failures": 0,
+    "failure_rate": 0.0,
+    "ci_low": 0,
+    "ci_high": 0.299,
+    "mean_acc_success": 0.782
+  },
+  {
+    "alpha": 56,
+    "alpha_over_r": 0.875,
+    "n": 8,
+    "failures": 1,
+    "failure_rate": 0.125,
+    "ci_low": 0.022,
+    "ci_high": 0.471,
+    "mean_acc_success": 0.777
+  },
+  {
+    "alpha": 64,
+    "alpha_over_r": 1.0,
+    "n": 9,
+    "failures": 2,
+    "failure_rate": 0.222,
+    "ci_low": 0.063,
+    "ci_high": 0.547,
+    "mean_acc_success": 0.7776
+  },
+  {
+    "alpha": 72,
+    "alpha_over_r": 1.125,
+    "n": 10,
+    "failures": 3,
+    "failure_rate": 0.3,
+    "ci_low": 0.108,
+    "ci_high": 0.603,
+    "mean_acc_success": 0.7727
+  },
+  {
+    "alpha": 80,
+    "alpha_over_r": 1.25,
+    "n": 6,
+    "failures": 1,
+    "failure_rate": 0.167,
+    "ci_low": 0.03,
+    "ci_high": 0.564,
+    "mean_acc_success": 0.763
+  },
+  {
+    "alpha": 96,
+    "alpha_over_r": 1.5,
+    "n": 9,
+    "failures": 9,
+    "failure_rate": 1.0,
+    "ci_low": 0.701,
+    "ci_high": 1,
+    "mean_acc_success": NaN
+  }
+]

@@ -1,0 +1,16 @@
+cell_id,method,model,task,regime,N,mean_delta,sign_flip_p,holm_rank,holm_threshold,survives_holm,bh_threshold,survives_bh,adjudication_pre
+7,PiSSA,Qwen2.5-3B,GSM8K,common,20,2.62,0.0002,1,0.00333333,True,0.00333333,True,supported
+4,PiSSA,roberta-base,MNLI,common,20,0.0090,0.0006,2,0.00357143,True,0.00666667,True,supported
+11,AdaLoRA,bert-base,SQuAD2,common,10,-3.0167,0.00195,3,0.00384615,True,0.01,True,reversed
+9,PiSSA,Qwen2.5-3B,GSM8K,faithful,19,-1.30,0.0024,4,0.00416667,True,0.0133333,True,reversed
+16,PiSSA,Gemma-7B,GSM8K_claim,faithful,10,-1.5845,0.0039,5,0.00454545,True,0.0166667,True,reversed
+5,AdaLoRA,bert-base,SQuAD1,common,9,-36.7,0.004,6,0.005,True,0.02,True,reversed
+13,PiSSA,Mistral-7B,GSM8K,common,10,-1.900,0.0078,7,0.00555556,False,0.0233333,True,reversed
+2,PiSSA,roberta-base,BoolQ,common,20,0.0110,0.011,8,0.00625,False,0.0266667,True,unsupported_dagger
+1,DoRA,roberta-base,BoolQ,common,20,0.0050,0.151,9,0.00714286,False,0.03,False,unsupported
+3,DoRA,roberta-base,MNLI,common,20,0.0010,0.31,10,0.00833333,False,0.0333333,False,unsupported
+14,DoRA,Mistral-7B,GSM8K,common,8,0.33,0.55,11,0.01,False,0.0366667,False,unsupported
+10,PiSSA,phi-2,GSM8K,common,18,-0.2593,0.6323,12,0.0125,False,0.04,False,unsupported
+6,rsLoRA,roberta-base,BoolQ,common,17,0.0020,0.833,13,0.0166667,False,0.0433333,False,unsupported
+8,DoRA,Qwen2.5-3B,GSM8K,common,20,-0.05,0.887,14,0.025,False,0.0466667,False,unsupported
+12,DoRA,Qwen2.5-3B,GSM8K,r32,8,0.04,0.89,15,0.05,False,0.05,False,unsupported

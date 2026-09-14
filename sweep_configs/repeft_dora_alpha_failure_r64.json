@@ -1,0 +1,14 @@
+{
+  "name": "repeft_dora_alpha_failure_r64",
+  "description": "DoRA α-driven failure replication on REPEFT cluster (independent verification of MultiAgent finding). BERT-base / MNLI 50K, r=64, vary α ∈ {32, 48, 56, 64, 72} (α/r ∈ {0.5, 0.75, 0.875, 1.0, 1.125}), 5 seeds each = 25 jobs.",
+  "base_command": "python3 real_lora_classify.py --model bert-base-uncased --dataset nyu-mll/glue --dataset-config mnli --train-split train --eval-split validation_matched --text-field-a premise --text-field-b hypothesis --label-field label --metric accuracy --output-dir . --peft-method dora --lr 1e-4 --lora-r 64 --lora-alpha {alpha} --lora-dropout 0.05 --num-epochs 3 --batch-size 16 --seq-length 256 --max-samples 50000 --max-eval-samples 1000 --seed {seed}",
+  "parameters": {
+    "alpha": [32, 48, 56, 64, 72],
+    "seed": [42, 43, 44, 45, 46]
+  },
+  "stage_files": ["/projects/REPEFT/real_lora_classify.py", "/projects/REPEFT/peft_utils.py"],
+  "optimize": "eval_accuracy",
+  "mode": "max",
+  "job_timeout": 5400,
+  "env_dir": null
+}

@@ -1,0 +1,11 @@
+seed,model,peft_method,train_samples,adalora_effective_tinit,adalora_effective_tfinal,eval_f1,eval_exact_match
+11,bert-base-uncased,adalora,5000,50,200,15.240524,10.0
+21,bert-base-uncased,adalora,5000,50,200,14.744765,9.5
+31,bert-base-uncased,adalora,5000,50,200,14.904028,10.0
+41,bert-base-uncased,adalora,5000,50,200,15.10054,9.5
+51,bert-base-uncased,adalora,5000,50,200,15.908243,10.7
+61,bert-base-uncased,adalora,5000,50,200,16.54301,11.0
+71,bert-base-uncased,adalora,5000,50,200,14.92194,9.6
+81,bert-base-uncased,adalora,5000,50,200,16.509676,11.2
+91,bert-base-uncased,adalora,5000,50,200,14.952109,10.0
+101,bert-base-uncased,adalora,5000,50,200,16.480256,11.0

@@ -1,0 +1,11 @@
+{
+  "name": "rev_lora_faithful_fp16",
+  "description": "REVISION: LoRA faithful FP16+GC (same precision as PiSSA faithful) to remove quantization confound",
+  "base_command": "python3 real_lora_train.py --model Qwen/Qwen2.5-3B --dataset openai/gsm8k --dataset-config main --dataset-split train --eval-split test --prompt-field question --target-field answer --eval-metric gsm8k_exact_match --generation-max-new-tokens 128 --output-dir . --peft-method lora --gradient-checkpointing --lr 0.00002 --lora-r 8 --lora-alpha 8 --lora-dropout 0 --num-epochs 1 --batch-size 1 --seq-length 512 --max-samples 3000 --max-eval-samples 300 --warmup-ratio 0.03 --seed {seed}",
+  "parameters": {"seed": [11,21,31,41,51,61,71,81,91,101,111,121,131,141,151,161,171,181,191,201]},
+  "stage_files": ["/projects/REPEFT/real_lora_train.py"],
+  "optimize": "eval_gsm8k_exact_match",
+  "mode": "max",
+  "job_timeout": 7200,
+  "env_dir": "$HOME/mlenv"
+}

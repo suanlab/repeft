@@ -1,0 +1,98 @@
+{
+  "baseline_name": "LoRA",
+  "candidate_name": "PiSSA",
+  "metric": "eval_gsm8k_exact_match",
+  "test_alternative": "two-sided",
+  "bootstrap_method": "BC (bias-corrected percentile)",
+  "shared_seeds": [
+    11,
+    21,
+    31,
+    41,
+    51,
+    61,
+    71,
+    81,
+    91,
+    101
+  ],
+  "baseline_mean": 49.6512508,
+  "candidate_mean_shared": 48.066717000000004,
+  "mean_delta": -1.5845337999999998,
+  "bootstrap_ci": {
+    "low": -2.327520599999999,
+    "high": -0.8870356000000001
+  },
+  "sign_flip_p": 0.00390625,
+  "wins": 1,
+  "losses": 9,
+  "ties": 0,
+  "baseline_failures": [],
+  "candidate_failures": [],
+  "per_seed": [
+    {
+      "seed": 11,
+      "baseline": 49.507202,
+      "candidate": 46.247157,
+      "delta": -3.260044999999998
+    },
+    {
+      "seed": 21,
+      "baseline": 49.203942,
+      "candidate": 47.308567,
+      "delta": -1.8953750000000014
+    },
+    {
+      "seed": 31,
+      "baseline": 47.763457,
+      "candidate": 47.990902,
+      "delta": 0.2274449999999959
+    },
+    {
+      "seed": 41,
+      "baseline": 50.796058,
+      "candidate": 48.066717,
+      "delta": -2.729341000000005
+    },
+    {
+      "seed": 51,
+      "baseline": 49.810462,
+      "candidate": 49.355572,
+      "delta": -0.4548899999999989
+    },
+    {
+      "seed": 61,
+      "baseline": 50.265353,
+      "candidate": 48.673237,
+      "delta": -1.5921159999999972
+    },
+    {
+      "seed": 71,
+      "baseline": 50.189538,
+      "candidate": 46.777862,
+      "delta": -3.411676
+    },
+    {
+      "seed": 81,
+      "baseline": 49.507202,
+      "candidate": 48.294162,
+      "delta": -1.2130399999999995
+    },
+    {
+      "seed": 91,
+      "baseline": 49.507202,
+      "candidate": 48.521607,
+      "delta": -0.9855949999999964
+    },
+    {
+      "seed": 101,
+      "baseline": 49.962092,
+      "candidate": 49.431387,
+      "delta": -0.5307049999999975
+    }
+  ],
+  "sign_flip_p_one_sided_greater": 0.9990234375,
+  "sign_flip_p_one_sided_less": 0.001953125,
+  "sign_flip_p_two_sided": 0.00390625,
+  "_audit_note": "Updated 2026-05-20 per CHECK.md B.1: previously reported one-sided greater (p=0.999, was misleading since observed direction opposes pre-specified H1: PiSSA>LoRA). Two-sided p=0.0039 is the standard convention; equivalent one-sided less p=0.00195 directly tests the observed reversal."
+}

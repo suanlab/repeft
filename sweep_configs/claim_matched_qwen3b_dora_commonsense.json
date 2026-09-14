@@ -1,0 +1,11 @@
+{
+  "name": "claim_matched_qwen3b_dora_commonsense",
+  "description": "Claim-matched: dora on commonsense_170k, Qwen3B, r=32, α=64",
+  "base_command": "python3 train_commonsense_dora.py --model Qwen/Qwen2.5-3B --peft-method dora --lora-r 32 --lora-alpha 64 --lora-dropout 0.05 --lr 0.0002 --num-epochs 1 --batch-size 2 --grad-accum 4 --seq-length 256 --max-train-samples 50000 --max-eval-samples 200 --load-in-4bit --seed {seed} --output-dir .",
+  "parameters": {"seed": [11,21,31,41,51,61,71,81,91,101]},
+  "stage_files": ["/projects/REPEFT/train_commonsense_dora.py"],
+  "optimize": "eval_avg",
+  "mode": "max",
+  "job_timeout": 43200,
+  "env_dir": "$HOME/mlenv"
+}

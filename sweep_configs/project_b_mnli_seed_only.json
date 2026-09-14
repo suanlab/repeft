@@ -1,0 +1,15 @@
+{
+    "name": "project_b_mnli_seed_only",
+    "description": "Project B pilot: train 16 seed-only LoRA classifiers on GLUE MNLI",
+    "base_command": "python3 real_lora_classify.py --model roberta-base --dataset nyu-mll/glue --dataset-config mnli --train-split train --eval-split validation_matched --text-field-a premise --text-field-b hypothesis --label-field label --metric accuracy --output-dir . --lr 0.0002 --lora-r 8 --lora-alpha 16 --lora-dropout 0.05 --num-epochs 2 --batch-size 8 --seq-length 256 --max-samples 20000 --max-eval-samples 2000 --seed {seed}",
+    "parameters": {
+        "seed": [42, 52, 62, 72, 82, 92, 102, 112, 122, 132, 142, 152, 162, 172, 182, 192]
+    },
+    "stage_files": [
+        "/projects/REPEFT/real_lora_classify.py"
+    ],
+    "optimize": "eval_accuracy",
+    "mode": "max",
+    "job_timeout": 1800,
+    "env_dir": "$HOME/mlenv"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "project_a_20seed_lora_mnli",
+  "description": "Project A 20-seed confirmatory: LoRA baseline on MNLI (paired with DoRA and PiSSA)",
+  "base_command": "python3 real_lora_classify.py --model roberta-base --dataset nyu-mll/glue --dataset-config mnli --train-split train --eval-split validation_matched --text-field-a premise --text-field-b hypothesis --label-field label --metric accuracy --output-dir . --peft-method lora --lr 0.0002 --lora-r 8 --lora-alpha 16 --lora-dropout 0.05 --num-epochs 2 --batch-size 8 --seq-length 256 --max-samples 7000 --max-eval-samples 1500 --seed {seed}",
+  "parameters": {
+    "seed": [11, 21, 31, 41, 51, 61, 71, 81, 91, 101, 111, 121, 131, 141, 151, 161, 171, 181, 191, 201]
+  },
+  "stage_files": [
+    "/projects/REPEFT/real_lora_classify.py"
+  ],
+  "optimize": "eval_accuracy",
+  "mode": "max",
+  "job_timeout": 1800,
+  "env_dir": "$HOME/mlenv"
+}

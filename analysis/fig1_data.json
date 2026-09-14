@@ -1,0 +1,21 @@
+{
+  "_comment": "Canonical data source for scripts/make_fig1_adjudication.py. Each cell records the paired mean delta and BC bootstrap 95% CI used in paper Table 1 (paper/repeft_emnlp.tex). Adjudication: sup / unsup / rev. Units are percentage-points for accuracy cells and F1-points for SQuAD cells. Generated from analysis/paired_t_sensitivity.csv + analysis/*.json paired summaries; regenerate by running scripts/build_fig1_data.py (see audit fix C1).",
+  "cells": [
+    {"id": 1,  "label": "BoolQ   DoRA    roberta-base   common",                   "delta":  0.50, "ci_lo":  -0.10, "ci_hi":  1.20, "adj": "unsup"},
+    {"id": 2,  "label": "BoolQ   PiSSA   roberta-base   common",                   "delta":  1.10, "ci_lo":   0.30, "ci_hi":  1.90, "adj": "unsup", "note": "raw p=0.011 but Holm fails"},
+    {"id": 3,  "label": "MNLI    DoRA    roberta-base   common",                   "delta":  0.10, "ci_lo":  -0.10, "ci_hi":  0.30, "adj": "unsup"},
+    {"id": 4,  "label": "MNLI    PiSSA   roberta-base   common",                   "delta":  0.90, "ci_lo":   0.60, "ci_hi":  1.20, "adj": "sup"},
+    {"id": 5,  "label": "SQuADv1 AdaLoRA bert-base      common",                   "delta": -36.7, "ci_lo": -38.00, "ci_hi": -35.4, "adj": "rev"},
+    {"id": 6,  "label": "BoolQ   rsLoRA  roberta-base   common",                   "delta":  0.20, "ci_lo":  -2.00, "ci_hi":  2.30, "adj": "unsup"},
+    {"id": 7,  "label": "GSM8K   PiSSA   Qwen2.5-3B     common",                   "delta":  2.62, "ci_lo":   1.67, "ci_hi":  3.55, "adj": "sup"},
+    {"id": 8,  "label": "GSM8K   DoRA    Qwen2.5-3B     common",                   "delta": -0.05, "ci_lo":  -0.73, "ci_hi":  0.60, "adj": "unsup"},
+    {"id": 9,  "label": "GSM8K   PiSSA   Qwen2.5-3B     faithful",                 "delta": -1.30, "ci_lo":  -2.02, "ci_hi": -0.61, "adj": "rev"},
+    {"id": 10, "label": "GSM8K   PiSSA   phi-2          common",                   "delta": -0.26, "ci_lo":  -1.39, "ci_hi":  0.85, "adj": "unsup"},
+    {"id": 11, "label": "SQuADv2 AdaLoRA bert-base      common",                   "delta": -3.02, "ci_lo":  -3.33, "ci_hi": -2.67, "adj": "rev"},
+    {"id": 12, "label": "GSM8K   DoRA    Qwen2.5-3B     r=32",                     "delta":  0.04, "ci_lo":  -0.63, "ci_hi":  0.71, "adj": "unsup"},
+    {"id": 13, "label": "GSM8K   PiSSA   Mistral-7B     common",                   "delta": -1.90, "ci_lo":  -2.97, "ci_hi": -0.90, "adj": "rev"},
+    {"id": 14, "label": "GSM8K   DoRA    Mistral-7B     common (MA)",              "delta":  0.33, "ci_lo":  -0.77, "ci_hi":  1.22, "adj": "unsup"},
+    {"id": 15, "label": "GSM8K   PiSSA   Qwen2.5-3B     faithful (claim-match)",   "delta": -1.29, "ci_lo":  -2.38, "ci_hi": -0.17, "adj": "unsup"},
+    {"id": 16, "label": "GSM8K   PiSSA   Gemma-7B       faithful (claim-match)",   "delta": -1.58, "ci_lo":  -2.33, "ci_hi": -0.89, "adj": "rev"}
+  ]
+}

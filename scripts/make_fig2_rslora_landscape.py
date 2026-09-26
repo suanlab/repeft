@@ -81,9 +81,9 @@ cbar.ax.tick_params(labelsize=9.5)
 ax.legend(loc="lower left", fontsize=10, framealpha=0.9, borderaxespad=0.4)
 
 # Annotate critical product
-ax.text(1.1e-3, CRITICAL / 1.1e-3 * 1.6, r"unsafe region (above curve $\to$ collapse)",
+ax.text(1.1e-3, CRITICAL / 1.1e-3 * 1.6, r"risk region (above: 11/32 cells collapse)",
         fontsize=10, color="crimson", ha="right", va="bottom")
-ax.text(1.1e-3, CRITICAL / 1.1e-3 / 1.6, r"safe region (below curve $\to$ stable)",
+ax.text(1.1e-3, CRITICAL / 1.1e-3 / 1.6, r"below: 40/40 cells stable",
         fontsize=10, color="darkgreen", ha="right", va="top")
 
 plt.tight_layout()

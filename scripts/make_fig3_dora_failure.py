@@ -54,16 +54,15 @@ for x, n, f, r, hi in zip(xs, ns, fails, rates, ci_hi):
 
 # Highlight α/r = 1.0 (the standard PEFT convention)
 ax.axvline(1.0, color="gray", linestyle=":", linewidth=1.0, alpha=0.6)
-ax.text(1.015, 0.04, r"standard convention $\alpha{=}r$",
-        rotation=90, ha="left", va="bottom", fontsize=8.5, color="gray")
+ax.text(1.0, 1.06, r"$\alpha{=}r$ convention", ha="center", va="bottom", fontsize=8, color="gray")
 
 ax.set_xlabel(r"$\alpha / r$  (at $r{=}64$, BERT-base / MNLI)")
 ax.set_ylabel("catastrophic failure rate")
-ax.set_title(r"DoRA: $\alpha$-driven failure at high rank (Wilson 95\% CI)")
-ax.set_ylim(0.0, 0.80)
-ax.set_xlim(0.40, 1.20)
+ax.set_title(r"DoRA: $\alpha$-driven failure at high rank (Wilson 95% CI)")
+ax.set_ylim(0.0, 1.12)
+ax.set_xlim(0.40, 1.60)
 ax.set_xticks(xs)
-ax.set_xticklabels([f"{x:.3g}" for x in xs])
+ax.set_xticklabels([f"{x:g}" for x in xs], fontsize=8)
 ax.grid(True, axis="y", linestyle=":", color="gray", alpha=0.4)
 
 plt.tight_layout()

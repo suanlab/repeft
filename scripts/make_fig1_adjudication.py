@@ -67,11 +67,14 @@ ax.axvline(0, color="black", linewidth=0.8, linestyle="-")
 
 # Row labels (cell number + descriptor)
 ax.set_yticks(ys)
-ax.set_yticklabels([f"#{cid}  {label}" for cid, label, *_ in cells],
+def _fmt(cid, label):
+    task, method, model, regime = (label.split(None, 3) + ["", "", "", ""])[:4]
+    return f"#{cid:<3}{task:<8}{method:<8}{model:<13}{regime:<22}"
+ax.set_yticklabels([_fmt(cid, label) for cid, label, *_ in cells],
                    family="monospace", fontsize=11.5)
 
 ax.set_xlim(-8, 5)
-ax.set_xlabel(r"paired $\Delta$ (candidate $-$ LoRA)  /  BC 95\% CI", fontsize=13)
+ax.set_xlabel(r"paired $\Delta$ (candidate $-$ LoRA)  /  95% bootstrap CI", fontsize=13)
 ax.set_title("16-cell PEFT adjudication: paired multi-seed results", fontsize=14)
 ax.tick_params(axis="x", labelsize=12)
 ax.grid(axis="x", linestyle=":", alpha=0.4)

@@ -78,7 +78,9 @@ cbar = plt.colorbar(sc_stable, ax=ax, pad=0.02)
 cbar.set_label("mean accuracy (stable cells)", fontsize=11)
 cbar.ax.tick_params(labelsize=9.5)
 
-ax.legend(loc="lower left", fontsize=10, framealpha=0.9, borderaxespad=0.4)
+# Legend outside the axes, centred below the x-label, so it never covers data points
+ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=3, fontsize=10,
+          frameon=False, columnspacing=1.2, handletextpad=0.4)
 
 # Annotate critical product
 ax.text(1.1e-3, CRITICAL / 1.1e-3 * 1.6, r"risk region (above: 11/32 cells collapse)",

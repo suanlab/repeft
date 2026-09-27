@@ -2,7 +2,7 @@
 
 Code, configs, and per-seed data for the AACL-IJCNLP 2026 (Main Conference) paper.
 
-**Suan Lee** (`suanlab@gmail.com`) and **Jae Seong Kim** (`kjsqp1010@semyung.ac.kr`)  
+**Suan Lee** (`suanlee@semyung.ac.kr`) and **Jae Seong Kim** (`kjsqp1010@semyung.ac.kr`)  
 School of Computer Science, Semyung University, Jecheon, Republic of Korea
 
 ---

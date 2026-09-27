@@ -41,7 +41,7 @@ adj_label = {"sup": "supported", "unsup": "unsupported", "rev": "reversed"}
 
 # Sized for a single ACL column (~3.0in) so text prints at ~7pt without downscaling.
 FS = 7.2
-fig, ax = plt.subplots(1, 1, figsize=(3.45, 3.45))
+fig, ax = plt.subplots(1, 1, figsize=(3.45, 2.95))
 
 # Compact row labels using the same vocabulary as Table 1.
 MODEL = {"roberta-base": "roberta", "bert-base": "bert", "Qwen2.5-3B": "Qwen3B",
@@ -75,14 +75,15 @@ def _fmt(cid, label):
 ax.set_yticks(ys)
 ax.set_yticklabels([_fmt(cid, label) for cid, label, *_ in cells],
                    family="monospace", fontsize=FS - 0.4)
-ax.tick_params(axis="y", length=0, pad=2)
+ax.tick_params(axis="y", length=0, pad=7)  # gap between row labels and the box
 ax.set_ylim(-0.7, len(cells) - 0.3)
 
-ax.set_xlim(-8.7, 3.75)  # left pad for the off-scale Cell 5 marker; right edge just past the widest CI (+3.55)
+ax.set_xlim(-8.7, 4)  # left pad for the off-scale Cell 5 marker
 ax.set_xticks([-7.5, -5, -2.5, 0, 2.5])
-ax.set_xticklabels(["≤−10", "−5", "−2.5", "0", "2.5"])
+ax.set_xticklabels(["≤−10", "", "−2.5", "0", "2.5"])  # −5 left unlabeled to avoid crowding
 ax.tick_params(axis="x", labelsize=FS)
-ax.set_xlabel(r"paired $\Delta$ (candidate $-$ LoRA), 95% bootstrap CI", fontsize=FS)
+# Right-align the x-label and legend to the box edge so nothing sticks out to the right.
+ax.set_xlabel(r"paired $\Delta$ (candidate $-$ LoRA), 95% bootstrap CI", fontsize=FS, loc="right", labelpad=2)
 ax.grid(axis="x", linestyle=":", alpha=0.4)
 
 # Cell 16 headline marker
@@ -93,7 +94,7 @@ ax.scatter([-1.58], [star_y], color="#e74c3c", marker="*", s=70, edgecolor="blac
 # Legend outside the axes, below the x-label
 from matplotlib.patches import Patch
 legend = [Patch(facecolor=colors[k], label=adj_label[k]) for k in ("sup", "unsup", "rev")]
-ax.legend(handles=legend, loc="upper center", bbox_to_anchor=(0.5, -0.13), ncol=3,
+ax.legend(handles=legend, loc="upper right", bbox_to_anchor=(1.02, -0.17), ncol=3,
           fontsize=FS, frameon=False, handlelength=1.2, columnspacing=1.0, handletextpad=0.4)
 
 plt.tight_layout()

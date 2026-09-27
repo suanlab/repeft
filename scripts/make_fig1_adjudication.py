@@ -78,7 +78,7 @@ ax.set_yticklabels([_fmt(cid, label) for cid, label, *_ in cells],
 ax.tick_params(axis="y", length=0, pad=2)
 ax.set_ylim(-0.7, len(cells) - 0.3)
 
-ax.set_xlim(-8, 4)
+ax.set_xlim(-8.7, 3.75)  # left pad for the off-scale Cell 5 marker; right edge just past the widest CI (+3.55)
 ax.set_xticks([-7.5, -5, -2.5, 0, 2.5])
 ax.set_xticklabels(["≤−10", "−5", "−2.5", "0", "2.5"])
 ax.tick_params(axis="x", labelsize=FS)

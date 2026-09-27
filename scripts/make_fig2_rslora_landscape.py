@@ -42,7 +42,7 @@ xs, ys, accs = np.array(xs), np.array(ys), np.array(accs)
 
 # Single-column width preserved; taller aspect + larger internal elements
 # so the figure is visually more prominent when scaled to width=\linewidth.
-fig, ax = plt.subplots(1, 1, figsize=(6.5, 5.4))
+fig, ax = plt.subplots(1, 1, figsize=(6.5, 4.5))
 
 # Scatter: color = accuracy; marker = stable square / collapsed X
 sc_stable = ax.scatter(
@@ -67,8 +67,7 @@ ax.plot(lr_line, ratio_line, "--", color="black", linewidth=2.0,
 ax.set_xscale("log"); ax.set_yscale("log")
 ax.set_xlabel(r"learning rate (AdamW)", fontsize=12)
 ax.set_ylabel(r"$\alpha/\sqrt{r}$", fontsize=13)
-ax.set_title(r"rsLoRA stability landscape ($n{=}303$ across 72 cells, BERT-base / MNLI 50K)",
-             fontsize=11)
+# (no title: the caption states the setting)
 ax.set_xlim(min(xs) * 0.7, max(xs) * 1.4)
 ax.set_ylim(min(ys) * 0.7, max(ys) * 1.4)
 ax.tick_params(axis="both", labelsize=10.5)

@@ -39,59 +39,62 @@ assert len(cells) == 16, f"Expected 16 cells in {DATA}, got {len(cells)}"
 colors = {"sup": "#2ecc71", "unsup": "#bdc3c7", "rev": "#e74c3c"}
 adj_label = {"sup": "supported", "unsup": "unsupported", "rev": "reversed"}
 
-fig, ax = plt.subplots(1, 1, figsize=(10.0, 7.8))
+# Sized for a single ACL column (~3.0in) so text prints at ~7pt without downscaling.
+FS = 7.2
+fig, ax = plt.subplots(1, 1, figsize=(3.45, 3.45))
+
+# Compact row labels using the same vocabulary as Table 1.
+MODEL = {"roberta-base": "roberta", "bert-base": "bert", "Qwen2.5-3B": "Qwen3B",
+         "phi-2": "phi-2", "Mistral-7B": "Mistral-7B", "Gemma-7B": "Gemma-7B"}
+TASK = {"SQuADv1": "SQuAD1", "SQuADv2": "SQuAD2"}
+REGIME = {"common": "C", "common (MA)": "C", "faithful": "F",
+          "faithful (claim-match)": "F", "r=32": "r32"}
 
 # Plot rows top-down (cell 1 at top)
 ys = np.arange(len(cells))[::-1]  # invert so cell 1 is top
 for y, (cid, label, d, lo, hi, adj) in zip(ys, cells):
     color = colors[adj]
-    # Special: cell 5 is so far reversed we clip it for visibility.
-    # Left-pointing triangle indicates the actual value lies further left
-    # (off-scale); annotated value shows the true Δ.
-    d_plot, lo_plot, hi_plot = d, lo, hi
     if d < -10:
-        ax.annotate(f"{d:.1f}", xy=(-7.5, y), xytext=(-7.3, y), color=color, fontsize=12,
+        # Off-scale (Cell 5): left-pointing triangle at the axis edge, true value annotated.
+        ax.scatter([-7.5], [y], color=color, marker="<", s=28, zorder=3,
+                   edgecolor="black", linewidth=0.5)
+        ax.annotate(f"{d:.1f}", xy=(-7.5, y), xytext=(-7.0, y), color=color, fontsize=FS - 0.5,
                     va="center", ha="left")
-        d_plot = -7.5
-        lo_plot = -7.5
-        hi_plot = -7.5
-        ax.scatter([d_plot], [y], color=color, marker="<", s=90, zorder=3,
-                   edgecolor="black", linewidth=0.6)
     else:
-        # Draw CI as horizontal bar
-        ax.plot([lo_plot, hi_plot], [y, y], color=color, linewidth=2.0, zorder=2)
-        ax.scatter([d_plot], [y], color=color, marker="o", s=44, edgecolor="black",
-                   linewidth=0.6, zorder=3)
+        ax.plot([lo, hi], [y, y], color=color, linewidth=1.6, zorder=2)
+        ax.scatter([d], [y], color=color, marker="o", s=16, edgecolor="black",
+                   linewidth=0.5, zorder=3)
 
-ax.axvline(0, color="black", linewidth=0.8, linestyle="-")
+ax.axvline(0, color="black", linewidth=0.7, linestyle="-")
 
-# Row labels (cell number + descriptor)
-ax.set_yticks(ys)
 def _fmt(cid, label):
     task, method, model, regime = (label.split(None, 3) + ["", "", "", ""])[:4]
-    return f"#{cid:<3}{task:<8}{method:<8}{model:<13}{regime:<22}"
+    regime = regime.strip()
+    return (f"{cid:>2} {MODEL.get(model, model):<10} {method:<7} "
+            f"{TASK.get(task, task):<6} {REGIME.get(regime, regime):<3}")
+ax.set_yticks(ys)
 ax.set_yticklabels([_fmt(cid, label) for cid, label, *_ in cells],
-                   family="monospace", fontsize=11.5)
+                   family="monospace", fontsize=FS - 0.4)
+ax.tick_params(axis="y", length=0, pad=2)
+ax.set_ylim(-0.7, len(cells) - 0.3)
 
-ax.set_xlim(-8, 5)
-ax.set_xlabel(r"paired $\Delta$ (candidate $-$ LoRA)  /  95% bootstrap CI", fontsize=13)
-ax.set_title("16-cell PEFT adjudication: paired multi-seed results", fontsize=14)
-ax.tick_params(axis="x", labelsize=12)
+ax.set_xlim(-8, 4)
+ax.set_xticks([-7.5, -5, -2.5, 0, 2.5])
+ax.set_xticklabels(["≤−10", "−5", "−2.5", "0", "2.5"])
+ax.tick_params(axis="x", labelsize=FS)
+ax.set_xlabel(r"paired $\Delta$ (candidate $-$ LoRA), 95% bootstrap CI", fontsize=FS)
 ax.grid(axis="x", linestyle=":", alpha=0.4)
-ax.set_xticks([-7.5, -5, -3, -1, 0, 1, 3, 5])
-ax.set_xticklabels(["$\\leq$ $-10$", "$-5$", "$-3$", "$-1$", "0", "1", "3", "5"])
 
-# Legend (manual)
+# Cell 16 headline marker
+star_y = ys[15]
+ax.scatter([-1.58], [star_y], color="#e74c3c", marker="*", s=70, edgecolor="black",
+           linewidth=0.6, zorder=4)
+
+# Legend outside the axes, below the x-label
 from matplotlib.patches import Patch
 legend = [Patch(facecolor=colors[k], label=adj_label[k]) for k in ("sup", "unsup", "rev")]
-ax.legend(handles=legend, loc="upper left", fontsize=12.5, framealpha=0.9)
-
-# Annotate Cell 16 (★ headline)
-star_y = ys[15]
-ax.scatter([-1.58], [star_y], color="#e74c3c", marker="*", s=260, edgecolor="black",
-           linewidth=0.9, zorder=4)
-ax.text(-2.0, star_y - 0.55, "Headline 7B reversal", fontsize=11.5, color="#e74c3c",
-        ha="center", style="italic")
+ax.legend(handles=legend, loc="upper center", bbox_to_anchor=(0.5, -0.13), ncol=3,
+          fontsize=FS, frameon=False, handlelength=1.2, columnspacing=1.0, handletextpad=0.4)
 
 plt.tight_layout()
 plt.savefig(OUT, bbox_inches="tight")

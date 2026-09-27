@@ -2,7 +2,8 @@
 
 Code, configs, and per-seed data for the AACL-IJCNLP 2026 (Main Conference) paper.
 
-**Suan Lee** — School of Computer Science, Semyung University — `suanlab@gmail.com`
+**Suan Lee** (`suanlab@gmail.com`) and **Jae Seong Kim** (`kjsqp1010@semyung.ac.kr`)  
+School of Computer Science, Semyung University, Jecheon, Republic of Korea
 
 ---
 
@@ -92,7 +93,7 @@ chain. Total ≈2,400 GPU-hours.
 ```bibtex
 @inproceedings{lee2026auditing,
   title     = {Auditing {PEFT} Claims: A Stability Probe Unifying Three {LoRA}-Variant Fragility Patterns},
-  author    = {Lee, Suan},
+  author    = {Lee, Suan and Kim, Jae Seong},
   booktitle = {Proceedings of AACL-IJCNLP 2026},
   year      = {2026}
 }

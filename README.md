@@ -10,7 +10,7 @@ School of Computer Science, Semyung University, Jecheon, Republic of Korea
 ## What this is
 
 A paired multi-seed audit of four LoRA variants (DoRA, PiSSA, AdaLoRA, rsLoRA) against vanilla LoRA
-across 16 claim cells spanning 125M–7B parameters, plus a 303-run stability landscape characterising
+across 16 claim cells spanning 110M–7B parameters, plus a 303-run stability landscape characterising
 when these methods become fragile.
 
 **Headline results**

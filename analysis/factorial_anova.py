@@ -1,24 +1,21 @@
 #!/usr/bin/env python3
-"""Two-way factorial ANOVA on PiSSA−LoRA delta for §5.3 ablation table.
+"""Two-way factorial ANOVA on the PiSSA−LoRA delta (Qwen2.5-3B GSM8K, Appendix B).
 
-Reproduces the paper's claim "Main effect of lr: F(1,51)=57.6, p<0.001,
-η²=0.44" from the per-seed paired deltas across the 2×2 (lr × α) factorial
-design on Qwen2.5-3B GSM8K.
+Default mode loads the REAL per-seed paired deltas from sweep_runs/ — the same
+52 observations used by the mixed-effects re-analysis
+(analysis/factorial_anova_mixed.py):
 
-Inputs (auto-discovered from analysis/ subdirs or sweep_runs/):
-  - Common baseline: lr=2e-4, α=16        (cell 7)
-  - lr-only swap:    lr=2e-5, α=16        (cell 9-variant)
-  - α-only swap:     lr=2e-4, α=r=8       (cell 8-variant)
-  - Both swap:       lr=2e-5, α=128       (cell 9, paper-faithful)
+  Common    lr=2e-4, α=16   20 paired seeds
+  α-swap    lr=2e-4, α=8     8 paired seeds
+  lr-swap   lr=2e-5, α=16    8 paired seeds
+  Faithful  lr=2e-5, α=8    16 paired seeds
 
-The 4 conditions × ~10 seeds each yield ~40-55 paired deltas.
+and fits a Type-III ANOVA (sum-to-zero contrasts, appropriate for the
+unbalanced design). η² = SS_effect / SS_total.
 
 Usage:
     python3 analysis/factorial_anova.py
-    python3 analysis/factorial_anova.py --csv <custom_long_format.csv>
-
-The default mode reads the four cells' per-seed JSONs and assembles them
-into a long-format DataFrame (lr_level, alpha_level, delta).
+    python3 analysis/factorial_anova.py --csv <long_format.csv>   # lr_level, alpha_level, delta
 
 Output: stdout summary + analysis/factorial_anova_output.csv
 """
@@ -171,40 +168,60 @@ def _build_synthetic_2x2_from_paper_summary() -> tuple[list[str], list[str], lis
     return lr_levels, alpha_levels, deltas
 
 
+def _load_real_per_seed() -> tuple[list[str], list[str], list[float]]:
+    """Per-seed paired deltas from sweep_runs/, via the mixed-effects script's loader."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "factorial_anova_mixed", REPO / "analysis" / "factorial_anova_mixed.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    rows = mod._collect_per_seed_deltas(mod.CONDITIONS)
+    return ([r["lr_level"] for r in rows], [r["alpha_level"] for r in rows],
+            [float(r["delta"]) for r in rows])
+
+
+def _anova_type3(lr_levels, alpha_levels, deltas) -> dict[str, dict]:
+    import pandas as pd
+    import statsmodels.api as sm
+    import statsmodels.formula.api as smf
+    df = pd.DataFrame({"lr": lr_levels, "alpha": alpha_levels, "delta": deltas})
+    fit = smf.ols("delta ~ C(lr, Sum) * C(alpha, Sum)", df).fit()
+    tab = sm.stats.anova_lm(fit, typ=3)
+    ss_total = float(((df["delta"] - df["delta"].mean()) ** 2).sum())
+    df_resid = int(tab.loc["Residual", "df"])
+    out = {}
+    for key, name in (("C(lr, Sum)", "lr"), ("C(alpha, Sum)", "alpha"),
+                      ("C(lr, Sum):C(alpha, Sum)", "lr_x_alpha")):
+        out[name] = {"F": float(tab.loc[key, "F"]), "df": (int(tab.loc[key, "df"]), df_resid),
+                     "p": float(tab.loc[key, "PR(>F)"]),
+                     "eta2": float(tab.loc[key, "sum_sq"]) / ss_total}
+    return out, len(df)
+
+
 def main() -> int:
     args = parse_args()
     if args.csv:
         lr_levels, alpha_levels, deltas = _load_long_csv(Path(args.csv))
     else:
-        lr_levels, alpha_levels, deltas = _build_synthetic_2x2_from_paper_summary()
-        print("Note: using synthetic per-seed reconstruction from Table 4 means")
-        print("(paper §5.3 reports F(1,51)=57.6, η²=0.44 for lr main effect)\n")
+        lr_levels, alpha_levels, deltas = _load_real_per_seed()
 
-    result = _two_way_anova(lr_levels, alpha_levels, deltas)
-    meta = result.pop("_meta")
-    print(f"Two-way factorial ANOVA on PiSSA−LoRA delta (Qwen2.5-3B GSM8K)")
-    print(f"Total N = {meta['N']}, grand mean = {meta['grand_mean']:+.3f}pp")
+    result, n = _anova_type3(lr_levels, alpha_levels, deltas)
+    print("Two-way factorial ANOVA (Type III) on PiSSA−LoRA delta (Qwen2.5-3B GSM8K)")
+    print(f"Total N = {n}")
     print()
-    print(f"{'Effect':>15}  {'F':>10}  {'df':>10}  {'p':>10}  {'eta^2':>10}")
-    print("-" * 65)
-    for effect, stats in result.items():
-        df = stats["df"]
-        p_str = f"{stats['p']:.4g}" if stats['p'] > 1e-4 else f"<{1e-3:g}"
-        print(f"{effect:>15}  {stats['F']:>10.2f}  ({df[0]},{df[1]})  "
-              f"{p_str:>10}  {stats['eta2']:>10.3f}")
-    print()
-    print("Match to paper §5.3:")
-    print(f"  lr main effect    F=57.6,  p<.001,  η²=0.44  (paper)")
-    print(f"  lr main effect    F={result['lr']['F']:.1f},  p={result['lr']['p']:.4g},  η²={result['lr']['eta2']:.2f}  (this script)")
+    print(f"{'Effect':>12}  {'F':>8}  {'df':>8}  {'p':>10}  {'eta^2':>8}")
+    print("-" * 54)
+    for effect, st in result.items():
+        print(f"{effect:>12}  {st['F']:>8.2f}  ({st['df'][0]},{st['df'][1]})  "
+              f"{st['p']:>10.4g}  {st['eta2']:>8.3f}")
 
-    # Write CSV
     out = Path(args.out)
     with out.open("w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["effect", "F_statistic", "df_num", "df_den", "p_value", "eta_squared"])
-        for effect, stats in result.items():
-            w.writerow([effect, f"{stats['F']:.4f}", stats["df"][0], stats["df"][1],
-                        f"{stats['p']:.6g}", f"{stats['eta2']:.6f}"])
+        for effect, st in result.items():
+            w.writerow([effect, f"{st['F']:.4f}", st["df"][0], st["df"][1],
+                        f"{st['p']:.6g}", f"{st['eta2']:.6f}"])
     print(f"\nWrote {out}")
     return 0
 

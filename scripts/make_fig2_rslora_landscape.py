@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""Figure 2: rsLoRA stability landscape — lr × α/√r product determines collapse.
+"""Figure 2: rsLoRA stability landscape, one panel per rank.
 
-Reads /projects/REPEFT/analysis/imported_from_multiagent/rslora_2d_sweep/summary.json
-which contains 303 completed trainings across 72 cells (r×α×lr grid) on BERT-base/MNLI 50K.
+Reads analysis/imported_from_multiagent/rslora_2d_sweep/summary.json
+(303 completed trainings across 72 (r, alpha, lr) cells on BERT-base/MNLI 50K).
+
+Cells are split into one panel per rank so that cells sharing (lr, alpha/sqrt r)
+but differing in r are not drawn on top of each other: at lr = 1e-3, equal
+lr_eff can be stable at one rank and collapsed at another.
 
 Output: paper/figures/fig2_rslora_landscape.pdf
 """
 from __future__ import annotations
 
 import json
-import math
 from pathlib import Path
 
 import matplotlib
@@ -17,76 +20,63 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 REPO = Path(__file__).resolve().parent.parent
 SUMMARY = REPO / "analysis" / "imported_from_multiagent" / "rslora_2d_sweep" / "summary.json"
 OUT = REPO / "paper" / "figures" / "fig2_rslora_landscape.pdf"
-CRITICAL = 5e-4  # critical lr_eff product (BERT-base, AdamW)
+CRITICAL = 5e-4   # lowest lr_eff at which a collapse was observed (BERT-base, AdamW)
 MAJORITY = 0.34   # MNLI majority-class baseline
+FS = 9
 
 OUT.parent.mkdir(parents=True, exist_ok=True)
 records = json.loads(SUMMARY.read_text())
+ranks = sorted({int(r["rank"]) for r in records})
 
-# Build (lr_eff, mean acc, stable) per cell
-xs, ys, accs, stable = [], [], [], []
-for r in records:
-    lr = float(r["lr"])
-    ratio = float(r["ratio"])    # α/√r
-    acc = float(r["mean"])
-    xs.append(lr)
-    ys.append(ratio)
-    accs.append(acc)
-    stable.append(bool(r.get("stable", acc > MAJORITY + 0.02)))
+fig, axes = plt.subplots(2, 2, figsize=(6.5, 5.0), sharex=True, sharey=True)
+lrs = sorted({float(r["lr"]) for r in records})
+ratios = sorted({float(r["ratio"]) for r in records})
+x_lo, x_hi = min(lrs) * 0.6, max(lrs) * 1.6
+y_lo, y_hi = min(ratios) * 0.6, max(ratios) * 1.6
+lr_line = np.geomspace(x_lo, x_hi, 200)
 
-xs, ys, accs = np.array(xs), np.array(ys), np.array(accs)
+sc = None
+n_stable = n_coll = 0
+for ax, rank in zip(axes.flat, ranks):
+    cells = [r for r in records if int(r["rank"]) == rank]
+    st = [r for r in cells if r["stable"]]
+    co = [r for r in cells if not r["stable"]]
+    n_stable += len(st); n_coll += len(co)
+    sc = ax.scatter([r["lr"] for r in st], [r["ratio"] for r in st], c=[r["mean"] for r in st],
+                    cmap="viridis", vmin=MAJORITY, vmax=0.80, s=70, marker="s",
+                    edgecolors="black", linewidths=0.6, zorder=3)
+    ax.scatter([r["lr"] for r in co], [r["ratio"] for r in co], c="crimson", s=95, marker="X",
+               edgecolors="black", linewidths=0.6, zorder=4)
+    ax.plot(lr_line, CRITICAL / lr_line, "--", color="black", linewidth=1.4, zorder=2)
+    ax.set_xscale("log"); ax.set_yscale("log")
+    ax.set_xlim(x_lo, x_hi); ax.set_ylim(y_lo, y_hi)
+    ax.set_title(f"$r={rank}$", fontsize=FS + 1)
+    ax.grid(True, which="both", linestyle=":", color="gray", alpha=0.4)
+    ax.tick_params(labelsize=FS - 1)
 
-# Single-column width preserved; taller aspect + larger internal elements
-# so the figure is visually more prominent when scaled to width=\linewidth.
-fig, ax = plt.subplots(1, 1, figsize=(6.5, 4.5))
+for ax in axes[1, :]:
+    ax.set_xlabel("learning rate (AdamW)", fontsize=FS)
+for ax in axes[:, 0]:
+    ax.set_ylabel(r"$\alpha/\sqrt{r}$", fontsize=FS + 1)
 
-# Scatter: color = accuracy; marker = stable square / collapsed X
-sc_stable = ax.scatter(
-    xs[np.array(stable)], ys[np.array(stable)],
-    c=accs[np.array(stable)], cmap="viridis",
-    vmin=MAJORITY, vmax=0.80, s=140, marker="s", edgecolors="black", linewidths=0.8,
-    label="stable",
-)
-collapsed = ~np.array(stable)
-ax.scatter(
-    xs[collapsed], ys[collapsed],
-    c="crimson", s=180, marker="X", edgecolors="black", linewidths=0.8,
-    label="collapsed (≈ majority class)",
-)
+from matplotlib.lines import Line2D
+handles = [
+    Line2D([], [], marker="s", linestyle="none", markerfacecolor="#3b528b", markeredgecolor="black",
+           markersize=7, label="stable (color = mean acc.)"),
+    Line2D([], [], marker="X", linestyle="none", markerfacecolor="crimson", markeredgecolor="black",
+           markersize=8, label=r"$\geq$1 seed collapsed"),
+    Line2D([], [], linestyle="--", color="black", label=r"$\mathrm{lr}_\mathrm{eff}=5\times10^{-4}$"),
+]
+fig.legend(handles=handles, loc="lower center", ncol=3, fontsize=FS, frameon=False,
+           bbox_to_anchor=(0.45, -0.01))
+fig.tight_layout(rect=(0, 0.05, 0.9, 1))
+cax = fig.add_axes([0.915, 0.18, 0.02, 0.72])
+cb = fig.colorbar(sc, cax=cax)
+cb.set_label("mean accuracy", fontsize=FS)
+cb.ax.tick_params(labelsize=FS - 1)
 
-# Critical iso-product line: lr × ratio = CRITICAL  →  ratio = CRITICAL / lr
-lr_line = np.geomspace(min(xs) * 0.7, max(xs) * 1.4, 200)
-ratio_line = CRITICAL / lr_line
-ax.plot(lr_line, ratio_line, "--", color="black", linewidth=2.0,
-        label=rf"$\mathrm{{lr}}_\mathrm{{eff}}={CRITICAL:.0e}$ (critical)")
-
-ax.set_xscale("log"); ax.set_yscale("log")
-ax.set_xlabel(r"learning rate (AdamW)", fontsize=12)
-ax.set_ylabel(r"$\alpha/\sqrt{r}$", fontsize=13)
-# (no title: the caption states the setting)
-ax.set_xlim(min(xs) * 0.7, max(xs) * 1.4)
-ax.set_ylim(min(ys) * 0.7, max(ys) * 1.4)
-ax.tick_params(axis="both", labelsize=10.5)
-ax.grid(True, which="both", linestyle=":", color="gray", alpha=0.4)
-
-cbar = plt.colorbar(sc_stable, ax=ax, pad=0.02)
-cbar.set_label("mean accuracy (stable cells)", fontsize=11)
-cbar.ax.tick_params(labelsize=9.5)
-
-# Legend outside the axes, centred below the x-label, so it never covers data points
-ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=3, fontsize=10,
-          frameon=False, columnspacing=1.2, handletextpad=0.4)
-
-# Annotate critical product
-ax.text(1.1e-3, CRITICAL / 1.1e-3 * 1.6, r"risk region (above: 11/32 cells collapse)",
-        fontsize=10, color="crimson", ha="right", va="bottom")
-ax.text(1.1e-3, CRITICAL / 1.1e-3 / 1.6, r"below: 40/40 cells stable",
-        fontsize=10, color="darkgreen", ha="right", va="top")
-
-plt.tight_layout()
 plt.savefig(OUT, bbox_inches="tight")
-print(f"Wrote {OUT}  (n_stable={int(np.array(stable).sum())}, n_collapsed={int(collapsed.sum())})")
+print(f"Wrote {OUT}  (n_stable={n_stable}, n_collapsed={n_coll})")

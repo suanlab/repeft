@@ -21,13 +21,14 @@ when these methods become fragile.
   and in the claim-matched 7B setting (Gemma-7B, MetaMathQA→GSM8K: Δ = −1.58pp, p ≈ 0.004, 1W/9L).
 - **AdaLoRA**'s dramatic SQuAD reversal is **budget-driven, not schedule-driven** — a 2×2 control shows
   the rank-allocation schedule moves F1 by <0.05 while the training budget moves it by ≈40.
-- **rsLoRA** collapses once `lr_eff = lr × α/√r` exceeds ≈5e-4 on BERT-base/MNLI/AdamW
-  (40/40 stable below the boundary; 11/32 collapse above it).
+- **rsLoRA** on BERT-base/MNLI/AdamW never collapsed below `lr_eff = lr × α/√r` ≈ 5e-4 (40/40 stable)
+  and collapsed in 11 of 32 cells above it — all at lr = 1e-3, with the critical α/√r depending on rank.
 
-**Scope of the probe.** `lr_eff` is a calibrated pre-flight check, not a law. It is necessary but not
-sufficient, its value is architecture- and optimizer-specific, it does not describe AdaLoRA, and one
-prospective 7B test failed — LLaMA-2-7B trains stably in bf16 at 4.5× the boundary. That failed test is
-reported in the paper and the cell is withdrawn from the mechanism's supporting evidence.
+**Scope of the probe.** `lr_eff` is a calibrated pre-flight check, not a law. Exceeding it is necessary
+but not sufficient for collapse, the product alone does not determine collapse, its value is
+architecture- and optimizer-specific (Mistral-7B degrades below it), PiSSA's reversal tracks learning rate
+but not α, it does not describe AdaLoRA, and one prospective 7B test failed — LLaMA-2-7B trains stably in
+bf16 at 4.5× the value. That failed test is reported in the paper and withdrawn as supporting evidence.
 
 ## Layout
 
